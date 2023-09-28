@@ -13,7 +13,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.net.PasswordAuthentication;
-
 public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {

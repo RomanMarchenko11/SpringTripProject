@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 public class TravellerServiceImpl implements TravellerService {
     private TravellerRepository travellerRepository;
     private TravellerMapper travellerMapper;
-    private Map<String,TravellerDTO> travellers;
+
 
     @Transactional(readOnly = true)
     @Override
@@ -66,6 +67,8 @@ public class TravellerServiceImpl implements TravellerService {
                 .map(travellerMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    private final Map<String,TravellerDTO> travellers = new HashMap<String, TravellerDTO>();
 
     @PostConstruct
     public void init() {

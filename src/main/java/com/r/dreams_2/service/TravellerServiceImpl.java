@@ -6,6 +6,7 @@ import com.r.dreams_2.exceptions.CustomException;
 import com.r.dreams_2.repository.TravellerRepository;
 import com.r.dreams_2.utils.TravellerMapper;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Service
 public class TravellerServiceImpl implements TravellerService {
@@ -65,19 +67,20 @@ public class TravellerServiceImpl implements TravellerService {
                 .collect(Collectors.toList());
     }
 
-
     @PostConstruct
     public void init() {
         TravellerDTO traveller1 = TravellerDTO.builder()
                 .id(1L)
                 .name("Roman")
                 .surname("Marchenko")
+                .email("R@gmail.com")
                 .build();
 
         TravellerDTO traveller2 = TravellerDTO.builder()
                 .id(2L)
                 .name("Anton")
                 .surname("Storm")
+                .email("S@gmail.com")
                 .build();
         travellers.put("1", traveller1);
         travellers.put("2", traveller2);

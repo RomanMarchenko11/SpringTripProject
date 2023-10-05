@@ -1,12 +1,14 @@
 package com.r.dreams_2.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,16 +17,14 @@ import org.springframework.stereotype.Component;
 @Table
 @Component
 @Scope("prototype")
-public class Point {
+public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String comment;
-    @JoinColumn(name = "trip_id")
-    private Trip trip;
-    @JoinColumn(name = "address_id")
-    private Address address;
-    @JoinColumn(name = "route_id")
-    private RouteToPoint route;
+    private String description;
+    @JoinColumn(name = "point_id")
+    private Point point;
+    @JoinColumn(name = "traveller_id")
+    private Traveller traveller;
 }

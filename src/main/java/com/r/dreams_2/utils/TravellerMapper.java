@@ -10,19 +10,20 @@ public class TravellerMapper {
     public TravellerDTO toDTO(Traveller traveller) {
         TravellerDTO dtoTraveller = new TravellerDTO();
         dtoTraveller.setId(traveller.getId());
-        dtoTraveller.setEmail(traveller.getName());
-        dtoTraveller.setName(traveller.getSurname());
+        dtoTraveller.setName(traveller.getName());
+        dtoTraveller.setSurname(traveller.getSurname());
         dtoTraveller.setEmail(traveller.getEmail());
+        dtoTraveller.setAddress(traveller.getAddress());
         return dtoTraveller;
     }
 
     public Traveller toEntity(TravellerDTO travellerDTO) {
         Traveller traveller = new Traveller();
         traveller.setId(travellerDTO.getId());
-        traveller.setEmail(travellerDTO.getName());
-        traveller.setName(travellerDTO.getSurname());
+        traveller.setName(travellerDTO.getName());
+        traveller.setSurname(travellerDTO.getSurname());
         traveller.setEmail(travellerDTO.getEmail());
-        // Перетворення інших полів за потребою
+        traveller.setAddress(travellerDTO.getAddress());
         return traveller;
     }
 

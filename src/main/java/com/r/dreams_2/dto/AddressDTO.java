@@ -1,5 +1,7 @@
 package com.r.dreams_2.dto;
 
+import com.r.dreams_2.entity.Point;
+import com.r.dreams_2.entity.Traveller;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +16,6 @@ public class AddressDTO {
     private String country;
     private String city;
     private String street;
+    private Point point;
+    private Traveller traveller;
 }

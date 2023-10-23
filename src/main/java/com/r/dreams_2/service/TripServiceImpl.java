@@ -21,26 +21,27 @@ public class TripServiceImpl implements TripService {
         this.tripMapper = tripMapper;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<TripDTO> getTrip(Long id) {
+        return tripRepository.findById(id).map(tripMapper::toDTO);
+    }
+
     @Transactional
     @Override
-    public TripDTO createTrip (TripDTO tripDTO) {
+    public TripDTO createTrip(TripDTO tripDTO) {
         Trip trip = tripMapper.toEntity(tripDTO);
-//        trip = tripRepository.save(trip);  //робиться автоматично
+        trip = tripRepository.save(trip);  //робиться автоматично
         return tripMapper.toDTO(trip);
     }
 
-    @Transactional(readOnly = true)
-    @Override
-    public Optional<Trip> getTrip (Long id) {
-        return tripRepository.findById(id);
-    }
     @Transactional
     @Override
     public TripDTO updateTrip(TripDTO tripDTO, Long id) {
         if (tripRepository.existsById(id)) {
             Trip trip = tripMapper.toEntity(tripDTO);
             trip.setId(id);
-//            trip = tripRepository.save(trip);
+            trip = tripRepository.save(trip);
             return tripMapper.toDTO(trip);
         }
         return null;
@@ -48,14 +49,13 @@ public class TripServiceImpl implements TripService {
 
     @Transactional(rollbackFor = CustomException.class, propagation = Propagation.REQUIRED)
     @Override
-    public TripDTO deleteTrip(Long id) {
+    public void deleteTrip(Long id) {
         tripRepository.deleteById(id);
-        throw new CustomException("Deleted wrong", 500);
     }
 
 //    @Transactional(readOnly = true)
 //    @Override
-//    public Optional<TripDTO> findAllPoints(Long id) {
+//    public Optional<TripDTO> findAllTrips(Long id) {
 //        return tripRepository.findAllById(id).map(tripMapper::toDTO);
 //    }
 }

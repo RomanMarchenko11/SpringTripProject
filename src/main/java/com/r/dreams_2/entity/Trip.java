@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,8 +25,13 @@ public class Trip {
     private Long id;
     private String name;
     private String description;
-    @JoinColumn(name = "point_id")
-    private Point point;
+
+    @OneToMany(mappedBy = "trip")
+//    @JoinColumn(name = "point")
+//    @PrimaryKeyJoinColumn
+    private List<Point> points = new ArrayList<>();
+
+    @OneToOne
     @JoinColumn(name = "traveller_id")
     private Traveller traveller;
 }

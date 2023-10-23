@@ -1,7 +1,7 @@
 package com.r.dreams_2.dto;
 
 import com.r.dreams_2.entity.Address;
-import jdk.jshell.Snippet;
+import com.r.dreams_2.entity.Trip;
 import lombok.*;
 
 @Data
@@ -15,4 +15,5 @@ public class TravellerDTO {
     private String email;
     private String password;
     private Address address;
+    private Trip trip;
 }

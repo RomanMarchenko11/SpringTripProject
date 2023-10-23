@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "points")
 @Component
 @Scope("prototype")
 public class Point {
@@ -21,10 +21,16 @@ public class Point {
     private Long id;
     private String name;
     private String comment;
+
+    @ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip;
+
+    @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToOne
     @JoinColumn(name = "route_id")
     private RouteToPoint route;
 }

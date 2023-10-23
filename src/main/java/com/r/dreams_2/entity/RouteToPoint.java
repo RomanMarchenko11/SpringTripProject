@@ -27,7 +27,8 @@ public class RouteToPoint {
     private String typeOfTransport;
     private LocalDateTime startRoute;
     private LocalDateTime finishRoute;
-    @JoinColumn(name = "point_id")
-    private Point point;
 
+    @OneToOne
+    @JoinColumn(name = "point")
+    private Point point;
 }

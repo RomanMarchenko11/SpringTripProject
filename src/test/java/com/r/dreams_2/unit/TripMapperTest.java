@@ -16,7 +16,7 @@ public class TripMapperTest {
         tripMapper = new TripMapper();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testToTDO() {
         Trip trip = new Trip();
         trip.setId(1L);

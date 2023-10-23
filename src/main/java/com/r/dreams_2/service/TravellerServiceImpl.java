@@ -5,25 +5,24 @@ import com.r.dreams_2.entity.Traveller;
 import com.r.dreams_2.exceptions.CustomException;
 import com.r.dreams_2.repository.TravellerRepository;
 import com.r.dreams_2.utils.TravellerMapper;
-import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 @Service
 public class TravellerServiceImpl implements TravellerService {
-    private TravellerRepository travellerRepository;
-    private TravellerMapper travellerMapper;
+    private final TravellerRepository travellerRepository;
+    private final TravellerMapper travellerMapper;
 
+    public TravellerServiceImpl(TravellerRepository travellerRepository, TravellerMapper travellerMapper) {
+        this.travellerRepository = travellerRepository;
+        this.travellerMapper = travellerMapper;
+    }
 
     @Transactional(readOnly = true)
     @Override
@@ -38,26 +37,25 @@ public class TravellerServiceImpl implements TravellerService {
         traveller = travellerRepository.save(traveller);
         return travellerMapper.toDTO(traveller);
     }
+
     @Transactional
     @Override
     public TravellerDTO updateTraveller(Long id, TravellerDTO travellerDTO) {
-        if (travellerRepository.existsById(id)) {
-            Traveller traveller = travellerMapper.toEntity(travellerDTO);
-            traveller.setId(id);
-            traveller = travellerRepository.save(traveller);
-            return travellerMapper.toDTO(traveller);
-        }
-        return null;
+//        Optional<Traveller> optionalTraveller = travellerRepository.findById(id);
+//        if (optionalTraveller.isEmpty()) {
+//            return null;
+//        }
+        Traveller traveller = travellerMapper.toEntity(travellerDTO);
+        traveller.setId(id);
+        travellerRepository.save(traveller);
+        return travellerMapper.toDTO(traveller);
     }
-
 
     @Transactional(rollbackFor = CustomException.class, propagation = Propagation.REQUIRED)
     @Override
-    public TravellerDTO deleteTraveller(Long id) {
+    public void deleteTraveller(Long id) {
         travellerRepository.deleteById(id);
-        throw new CustomException("Deleted wrong", 500);
     }
-
 
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     @Override
@@ -67,25 +65,25 @@ public class TravellerServiceImpl implements TravellerService {
                 .map(travellerMapper::toDTO)
                 .collect(Collectors.toList());
     }
-
-    private final Map<String,TravellerDTO> travellers = new HashMap<String, TravellerDTO>();
-
-    @PostConstruct
-    public void init() {
-        TravellerDTO traveller1 = TravellerDTO.builder()
-                .id(1L)
-                .name("Roman")
-                .surname("Marchenko")
-                .email("R@gmail.com")
-                .build();
-
-        TravellerDTO traveller2 = TravellerDTO.builder()
-                .id(2L)
-                .name("Anton")
-                .surname("Storm")
-                .email("S@gmail.com")
-                .build();
-        travellers.put("1", traveller1);
-        travellers.put("2", traveller2);
-    }
+//
+//    private final Map<String,TravellerDTO> travellers = new HashMap<String, TravellerDTO>();
+//
+//    @PostConstruct
+//    public void init() {
+//        TravellerDTO traveller1 = TravellerDTO.builder()
+//                .id(1L)
+//                .name("Roman")
+//                .surname("Marchenko")
+//                .email("R@gmail.com")
+//                .build();
+//
+//        TravellerDTO traveller2 = TravellerDTO.builder()
+//                .id(2L)
+//                .name("Anton")
+//                .surname("Storm")
+//                .email("S@gmail.com")
+//                .build();
+//        travellers.put("1", traveller1);
+//        travellers.put("2", traveller2);
+//    }
 }

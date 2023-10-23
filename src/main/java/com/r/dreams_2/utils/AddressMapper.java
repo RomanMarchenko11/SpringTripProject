@@ -12,6 +12,8 @@ public class AddressMapper {
         dtoAddress.setCountry(address.getCountry());
         dtoAddress.setCity(address.getCity());
         dtoAddress.setStreet(address.getStreet());
+        dtoAddress.setPoint(address.getPoint());
+        dtoAddress.setTraveller(address.getTraveller());
         return dtoAddress;
     }
 
@@ -21,6 +23,8 @@ public class AddressMapper {
         address.setCountry(addressDTO.getCountry());
         address.setCity(addressDTO.getCity());
         address.setStreet(address.getStreet());
+        address.setPoint(address.getPoint());
+        address.setTraveller(address.getTraveller());
         return address;
     }
 }

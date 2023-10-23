@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Role;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "travellers")
+@Table
 @Component
 @Scope("prototype")
 public class Traveller {
@@ -26,9 +25,13 @@ public class Traveller {
     private String email;
     @JsonIgnore
     private String password;
+
+    @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
 //    private RoleUser roleUser;
+
+    @OneToOne
     @JoinColumn(name = "trip")
     private Trip trip;
 }

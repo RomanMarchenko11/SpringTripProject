@@ -13,7 +13,9 @@ public class TravellerMapper {
         dtoTraveller.setName(traveller.getName());
         dtoTraveller.setSurname(traveller.getSurname());
         dtoTraveller.setEmail(traveller.getEmail());
+        dtoTraveller.setPassword(traveller.getPassword());
         dtoTraveller.setAddress(traveller.getAddress());
+        dtoTraveller.setTrip(traveller.getTrip());
         return dtoTraveller;
     }
 
@@ -23,8 +25,9 @@ public class TravellerMapper {
         traveller.setName(travellerDTO.getName());
         traveller.setSurname(travellerDTO.getSurname());
         traveller.setEmail(travellerDTO.getEmail());
+        traveller.setPassword(travellerDTO.getPassword());
         traveller.setAddress(travellerDTO.getAddress());
+        traveller.setTrip(travellerDTO.getTrip());
         return traveller;
     }
-
 }

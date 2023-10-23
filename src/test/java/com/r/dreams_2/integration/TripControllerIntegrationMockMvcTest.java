@@ -25,7 +25,7 @@ public class TripControllerIntegrationMockMvcTest {
 
     @Test
     public void testGetTrip() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/trips/info"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/trips/trip/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Hello new Trip! )) "));
     }

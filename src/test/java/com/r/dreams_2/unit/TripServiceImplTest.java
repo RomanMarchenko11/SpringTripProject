@@ -70,7 +70,7 @@ public class TripServiceImplTest {
 
         given(tripRepository.findById(1L)).willReturn(Optional.of(trip));
 
-        Optional<Trip> resultDTO = tripService.getTrip(1L);
+        Optional<TripDTO> resultDTO = tripService.getTrip(1L);
 
         assertTrue(resultDTO.isPresent());
         assertEquals(1L, resultDTO.get().getId());

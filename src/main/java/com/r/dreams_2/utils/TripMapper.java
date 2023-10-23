@@ -11,7 +11,8 @@ public class TripMapper {
         dtoTrip.setId (trip.getId());
         dtoTrip.setName(trip.getName());
         dtoTrip.setDescription(trip.getDescription());
-        dtoTrip.setPoint(trip.getPoint());
+        dtoTrip.setPoints(trip.getPoints());
+        dtoTrip.setTraveller(trip.getTraveller());
         return dtoTrip;
     }
 
@@ -20,7 +21,7 @@ public class TripMapper {
         trip.setId(tripDTO.getId());
         trip.setName(tripDTO.getName());
         trip.setDescription(tripDTO.getDescription());
-        trip.setPoint(tripDTO.getPoint());
+        trip.setPoints(tripDTO.getPoints());
         trip.setTraveller(tripDTO.getTraveller());
         return trip;
     }
